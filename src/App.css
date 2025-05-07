@@ -1,0 +1,11 @@
+#root {
+  margin: 0 auto;
+  height: 100vh;
+}
+
+:root {
+  --top-bar-height: 54px;
+  --footer-height: 54px;
+  --sidebar-width: 320px;
+  --content-height: calc(100vh - 108px);
+}

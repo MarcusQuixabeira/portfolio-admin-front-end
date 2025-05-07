@@ -1,0 +1,15 @@
+@keyframes slide-in {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%
+  }
+}
+
+.pb-slider {
+  position: absolute;
+  animation-duration: 1.5s;
+  animation-name: slide-in;
+  animation-iteration-count: infinite;
+}
