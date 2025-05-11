@@ -4,8 +4,9 @@ import { FieldErrors, useForm } from 'react-hook-form'
 import { Language } from "../../../types"
 import ApiHandler from "../../../api"
 import Button from "../../base/Button"
+import { toast } from "react-toastify"
 
-function LanguageForm() {
+export default function LanguageEdit() {
   const [language, setLanguage] = useState<Language>()
   const [loading, setLoading] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm(
@@ -23,13 +24,18 @@ function LanguageForm() {
     setLoading(true)
     ApiHandler.get(`/language/${params.language_id}`)
       .then(async (response) => {
-        setLanguage(await response.json())
+        if (response.ok) {
+          setLanguage(await response.json())
+        } else {
+          if (response.status === 401) {
+            toast.error('Unauthorized!')
+            window.localStorage.removeItem('auth_token')
+            navigate('/login')
+          }
+        }
       })
       .catch((error) => {
-        console.log(error)
-      })
-      .finally(() => {
-        setLoading(false)
+        toast.error(`An unexpected error ocurred: ${error.message}`)
       })
   }, [])
 
@@ -43,8 +49,23 @@ function LanguageForm() {
 
   function onSubmit(data: any) {
     ApiHandler.patch(data, `/language/${ language?.id }`)
-      .then(() => {
-        navigate('/languages')
+      .then(async (response) => {
+        if (response.ok) {
+          toast.success('Language updated successfully.')
+          navigate('/languages')
+        } else {
+          if (response.status === 401) {
+            toast.error('Unauthorized!')
+            window.localStorage.removeItem('auth_token')
+            navigate('/login')
+          }
+        }
+      })
+      .catch((error) => {
+        toast.error(`An unexpected error ocurred: ${error.message}`)
+      })
+      .finally(() => {
+        setLoading(false)
       })
   }
 
@@ -94,5 +115,3 @@ function LanguageForm() {
     </>
   )
 }
-
-export default LanguageForm

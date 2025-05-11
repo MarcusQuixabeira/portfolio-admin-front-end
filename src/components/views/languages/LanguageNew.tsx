@@ -3,6 +3,7 @@ import Button from "../../base/Button"
 import { useNavigate } from "react-router"
 import { useForm } from 'react-hook-form'
 import ApiHandler from "../../../api"
+import { toast } from "react-toastify"
 
 function LanguageNew() {
   const [loading, setLoading] = useState(false)
@@ -21,11 +22,20 @@ function LanguageNew() {
   function onSubmit(data: any) {
     setLoading(true)
     ApiHandler.post(data, '/language')
-      .then(async () => {
-        navigate('/languages')
+      .then(async (response) => {
+        if (response.ok) {
+          toast.success('Language created successfully.')
+          navigate('/languages')
+        } else {
+          if (response.status === 401) {
+            toast.error('Unauthorized!')
+            window.localStorage.removeItem('auth_token')
+            navigate('/login')
+          }
+        }
       })
       .catch((error) => {
-        console.log(error)
+        toast.error(`An unexpected error ocurred: ${error.message}`)
       })
       .finally(() => {
         setLoading(false)
