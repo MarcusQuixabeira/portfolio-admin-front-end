@@ -20,7 +20,7 @@ export default function LanguageList() {
   let navigate = useNavigate()
 
   function handleClickHome() {
-    navigate('/')
+    navigate('/dashboard')
   }
 
   function handleClickAdd() {
@@ -40,7 +40,7 @@ export default function LanguageList() {
         } else if (response.status === 401) {
           window.localStorage.removeItem("auth_token")
           toast.error('Unauthorized')
-          navigate('/login')
+          navigate('/')
         }
       })
       .catch((error) => {

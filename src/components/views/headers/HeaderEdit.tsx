@@ -31,7 +31,7 @@ export default function HeaderEdit() {
         } else if (response.status === 401) {
           window.localStorage.removeItem("auth_token")
           toast.error('Unauthorized')
-          navigate('/login')
+          navigate('/')
         }
       })
       .catch((error) => {
@@ -47,7 +47,7 @@ export default function HeaderEdit() {
         } else if (response.status === 401) {
           window.localStorage.removeItem("auth_token")
           toast.error('Unauthorized')
-          navigate('/login')
+          navigate('/')
         }
       })
       .catch((error) => {
@@ -72,7 +72,7 @@ export default function HeaderEdit() {
         } else if (response.status === 401) {
           window.localStorage.removeItem("auth_token")
           toast.error('Unauthorized')
-          navigate('/login')
+          navigate('/')
         }
       })
       .catch((error) => {

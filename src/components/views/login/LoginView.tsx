@@ -23,7 +23,7 @@ export default function LoginView() {
           data = await response.json()
           window.localStorage.setItem('auth_token', data.access_token)
           toast.success('Logged in successfully.')
-          navigate("/")
+          navigate("/dashboard")
         } else {
           if (response.status === 401) {
             toast.error('Invalid username or password.')

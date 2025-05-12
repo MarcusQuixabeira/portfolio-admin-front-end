@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router';
 import { Slide, ToastContainer } from 'react-toastify'
-import { UserContext } from './contexts/UserContext';
-import ApiHandler from './api'
 import AuthLayout from './components/layouts/AuthLayout'
 import UnauthLayout from './components/layouts/UnauthLayout'
 import ProtectedRoute from './components/base/ProtectedRoute.tsx';
@@ -20,24 +18,14 @@ import './App.css'
 
 
 function App() {
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    ApiHandler.get('/get_current_user').then(async (response) => {
-      if (response.ok) {
-        setUser(await response.json())
-      }
-    })
-  }, [])
-
   return (
     <>
       <Routes>
         <Route element={<UnauthLayout />}>
-          <Route path='/login' element={<LoginView />} />
+          <Route path='/' element={<LoginView />} />
         </Route>
-        <Route element={<UserContext value={user}><AuthLayout /></UserContext>}>
-          <Route path='/' element={<ProtectedRoute><DashboardView /></ProtectedRoute>} />
+        <Route element={<AuthLayout />}>
+          <Route path='/dashboard' element={<ProtectedRoute><DashboardView /></ProtectedRoute>} />
           <Route path='/languages' element={<ProtectedRoute><LanguageList /></ProtectedRoute>} />
           <Route path='/languages/new' element={<ProtectedRoute><LanguageNew /></ProtectedRoute>} />
           <Route path='/languages/:language_id/view' element={<ProtectedRoute><LanguageView /></ProtectedRoute>} />

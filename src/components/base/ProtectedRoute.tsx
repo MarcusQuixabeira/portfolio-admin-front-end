@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   useEffect(() => {
     const authToken = window.localStorage.getItem('auth_token')
     if (!authToken) {
-      navigate("/login")
+      navigate('/')
     }
   }, [location]);
   return (

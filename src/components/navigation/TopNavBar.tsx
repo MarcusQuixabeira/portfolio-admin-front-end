@@ -15,7 +15,7 @@ function TopNavbar() {
   function logout() {
     toast.success('Bye-bye!', { autoClose: 2000 })
     window.localStorage.removeItem('auth_token')
-    navigate('/login')
+    navigate('/')
   }
 
   function handleLogoutClick() {
@@ -31,14 +31,14 @@ function TopNavbar() {
                 <LuX size={20} />
               </a>
             </li>
-            <NavLink to='/' className='flex justify-center items-center w-auto px-5 text-white hover:bg-zinc-700'>
+            <NavLink to='/dashboard' className='flex justify-center items-center w-auto px-5 text-white hover:bg-zinc-700'>
               <li>
                 Home
               </li>
             </NavLink>
           </div>
           <div className='flex'>
-            <NavLink to="/" className='w-auto px-5 text-2xl text-white font-black flex justify-center items-center'>
+            <NavLink to="/dashboard" className='w-auto px-5 text-2xl text-white font-black flex justify-center items-center'>
               <li>
                 Porfolio Admin
               </li>
