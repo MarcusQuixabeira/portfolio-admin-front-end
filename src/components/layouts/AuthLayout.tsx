@@ -5,7 +5,7 @@ import TopNavbar from "../navigation/TopNavBar"
 import Loading from "../base/Loading"
 
 interface AuthLayoutProps {
-  loading: boolean
+  loading?: boolean
 }
 
 function AuthLayout({ loading }: AuthLayoutProps) {

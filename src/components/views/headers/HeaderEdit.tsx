@@ -28,12 +28,10 @@ export default function HeaderEdit() {
       .then(async (response) => {
         if (response.ok) {
           setHeader(await response.json())
-        } else {
-          if (response.status === 401) {
-            toast.error('Unauthorized!')
-            window.localStorage.removeItem('auth_token')
-            navigate('/login')
-          }
+        } else if (response.status === 401) {
+          window.localStorage.removeItem("auth_token")
+          toast.error('Unauthorized')
+          navigate('/login')
         }
       })
       .catch((error) => {
@@ -46,12 +44,10 @@ export default function HeaderEdit() {
       .then(async (response) => {
         if (response.ok) {
           setLanguages(await response.json())
-        } else {
-          if (response.status === 401) {
-            toast.error('Unauthorized!')
-            window.localStorage.removeItem('auth_token')
-            navigate('/login')
-          }
+        } else if (response.status === 401) {
+          window.localStorage.removeItem("auth_token")
+          toast.error('Unauthorized')
+          navigate('/login')
         }
       })
       .catch((error) => {
@@ -73,12 +69,10 @@ export default function HeaderEdit() {
         if (response.ok) {
           toast.success('Header updated successfully.')
           navigate('/headers')
-        } else {
-          if (response.status === 401) {
-            toast.error('Unauthorized!')
-            window.localStorage.removeItem('auth_token')
-            navigate('/login')
-          }
+        } else if (response.status === 401) {
+          window.localStorage.removeItem("auth_token")
+          toast.error('Unauthorized')
+          navigate('/login')
         }
       })
       .catch((error) => {

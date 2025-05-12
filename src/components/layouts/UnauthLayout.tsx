@@ -2,7 +2,7 @@ import { Outlet } from "react-router"
 import Loading from "../base/Loading"
 
 interface UnauthLayoutProps {
-  loading: boolean
+  loading?: boolean
 }
 
 function UnauthLayout({ loading }: UnauthLayoutProps) {

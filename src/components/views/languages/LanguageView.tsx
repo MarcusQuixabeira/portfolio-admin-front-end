@@ -17,12 +17,10 @@ function LanguageView() {
       .then(async (response) => {
         if (response.ok) {
           setLanguage(await response.json())
-        } else {
-          if (response.status === 401) {
-            toast.error('Unauthorized!')
-            window.localStorage.removeItem('auth_token')
-            navigate('/login')
-          }
+        } else if (response.status === 401) {
+          window.localStorage.removeItem("auth_token")
+          toast.error('Unauthorized')
+          navigate('/login')
         }
       })
       .catch((error) => {
@@ -51,12 +49,10 @@ function LanguageView() {
           setShowModal(false)
           navigate('/languages')
           toast.success('Language deleted successfully.')
-        } else {
-          if (response.status === 401) {
-            toast.error('Unauthorized!')
-            window.localStorage.removeItem('auth_token')
-            navigate('/login')
-          }
+        } else if (response.status === 401) {
+          window.localStorage.removeItem("auth_token")
+          toast.error('Unauthorized')
+          navigate('/login')
         }
       }).catch((error) => {
         toast.error(`An unexpected error ocurred: ${error.message}`)

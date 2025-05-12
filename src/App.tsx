@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Routes, Route, useNavigate } from 'react-router';
+import { Routes, Route } from 'react-router';
 import { Slide, ToastContainer } from 'react-toastify'
 import { UserContext } from './contexts/UserContext';
 import ApiHandler from './api'
@@ -21,25 +21,22 @@ import './App.css'
 
 function App() {
   const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(false)
-  let navigate = useNavigate()
 
   useEffect(() => {
-    setLoading(true)
     ApiHandler.get('/get_current_user').then(async (response) => {
       if (response.ok) {
         setUser(await response.json())
-        navigate('/')
       }
-    }).finally(() => {
-      setLoading(false)
     })
   }, [])
 
   return (
     <>
       <Routes>
-        <Route element={<UserContext value={user}><AuthLayout loading={loading} /></UserContext>}>
+        <Route element={<UnauthLayout />}>
+          <Route path='/login' element={<LoginView />} />
+        </Route>
+        <Route element={<UserContext value={user}><AuthLayout /></UserContext>}>
           <Route path='/' element={<ProtectedRoute><DashboardView /></ProtectedRoute>} />
           <Route path='/languages' element={<ProtectedRoute><LanguageList /></ProtectedRoute>} />
           <Route path='/languages/new' element={<ProtectedRoute><LanguageNew /></ProtectedRoute>} />
@@ -50,13 +47,11 @@ function App() {
           <Route path='/headers/:header_id/view' element={<ProtectedRoute><HeaderView /></ProtectedRoute>} />
           <Route path='/headers/:header_id/edit' element={<ProtectedRoute><HeaderEdit /></ProtectedRoute>} />
         </Route>
-        <Route element={<UnauthLayout loading={loading} />}>
-          <Route path='/login' element={<LoginView />} />
-        </Route>
       </Routes>
       <ToastContainer
         position="bottom-center"
-        autoClose={3000}
+        autoClose={1000}
+        limit={1}
         hideProgressBar={false}
         newestOnTop
         closeOnClick

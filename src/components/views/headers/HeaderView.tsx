@@ -17,12 +17,10 @@ export default function HeaderView() {
       .then(async (response) => {
         if (response.ok) {
           setHeader(await response.json())
-        } else {
-          if (response.status === 401) {
-            toast.error('Unauthorized!')
-            window.localStorage.removeItem('auth_token')
-            navigate('/login')
-          }
+        } else if (response.status === 401) {
+          window.localStorage.removeItem("auth_token")
+          toast.error('Unauthorized')
+          navigate('/login')
         }
       })
       .catch((error) => {
@@ -51,12 +49,10 @@ export default function HeaderView() {
           setShowModal(false)
           navigate('/headers')
           toast.success('Header deleted successfully.')
-        } else {
-          if (response.status === 401) {
-            toast.error('Unauthorized!')
-            window.localStorage.removeItem('auth_token')
-            navigate('/login')
-          }
+        } else if (response.status === 401) {
+          window.localStorage.removeItem("auth_token")
+          toast.error('Unauthorized')
+          navigate('/login')
         }
       }).catch((error) => {
         toast.error(`An unexpected error ocurred: ${error.message}`)

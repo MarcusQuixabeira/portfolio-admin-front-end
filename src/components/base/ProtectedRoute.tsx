@@ -1,16 +1,23 @@
-import { useContext } from "react";
-import { Navigate } from "react-router";
-import { UserContext } from "../../contexts/UserContext";
+import { useNavigate, useLocation } from "react-router";
+import { useEffect } from "react";
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
 };
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const user = useContext(UserContext)
+  let navigate = useNavigate()
+  let location = useLocation()
+
+  useEffect(() => {
+    const authToken = window.localStorage.getItem('auth_token')
+    if (!authToken) {
+      navigate("/login")
+    }
+  }, [location]);
   return (
     <>
-      { !user ? <Navigate to={'/login'} replace/> : children }
+      { children }
     </>
   )
 }

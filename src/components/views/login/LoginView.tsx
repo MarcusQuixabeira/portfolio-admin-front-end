@@ -2,9 +2,12 @@ import { toast } from 'react-toastify'
 import { FieldErrors, useForm } from 'react-hook-form'
 import ApiHandler from '../../../api';
 import Button from '../../base/Button';
+import { useNavigate } from 'react-router';
 
 export default function LoginView() {
   const { register, handleSubmit, formState: { errors } } = useForm()
+
+  let navigate = useNavigate()
 
   function handleLoginClick() {
     handleSubmit(onSubmit)()
@@ -20,7 +23,7 @@ export default function LoginView() {
           data = await response.json()
           window.localStorage.setItem('auth_token', data.access_token)
           toast.success('Logged in successfully.')
-          location.reload()
+          navigate("/")
         } else {
           if (response.status === 401) {
             toast.error('Invalid username or password.')

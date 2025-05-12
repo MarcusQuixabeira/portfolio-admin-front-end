@@ -37,12 +37,10 @@ export default function LanguageList() {
       .then(async (response) => {
         if (response.ok) {
           setLanguages(await response.json())
-        } else {
-          if (response.status === 401) {
-            toast.error('Unauthorized!')
-            window.localStorage.removeItem('auth_token')
-            navigate('/login')
-          }
+        } else if (response.status === 401) {
+          window.localStorage.removeItem("auth_token")
+          toast.error('Unauthorized')
+          navigate('/login')
         }
       })
       .catch((error) => {
