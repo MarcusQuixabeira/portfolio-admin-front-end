@@ -9,3 +9,7 @@
   --sidebar-width: 320px;
   --content-height: calc(100vh - 108px);
 }
+
+.toast-position {
+  bottom: 70px !important;
+}

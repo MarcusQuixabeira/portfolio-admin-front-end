@@ -36,6 +36,7 @@ function App() {
         </Route>
       </Routes>
       <ToastContainer
+        className="toast-position"
         position="bottom-center"
         autoClose={1000}
         limit={1}
