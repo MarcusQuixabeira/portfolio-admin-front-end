@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router';
 import { Slide, ToastContainer } from 'react-toastify'
 import AuthLayout from './components/layouts/AuthLayout'
