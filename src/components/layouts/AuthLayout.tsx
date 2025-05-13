@@ -13,6 +13,7 @@ interface AuthLayoutProps {
 
 function AuthLayout({ loading }: AuthLayoutProps) {
   const [user, setUser] = useState(null)
+  const [displaySidebar, setDisplaySidebar] = useState(true)
 
   useEffect(() => {
     ApiHandler.get('/get_current_user').then(async (response) => {
@@ -21,14 +22,19 @@ function AuthLayout({ loading }: AuthLayoutProps) {
       }
     })
   }, [])
+
+  function toogleSidebar() {
+    setDisplaySidebar(!displaySidebar)
+  }
+
   return (
     <>
       { loading ? <Loading /> :
         <UserContext value={user}>
           <div className='flex-colum h-full w-full'>
-            <TopNavbar />
+            <TopNavbar toogleSidebar={ toogleSidebar }/>
             <div className='flex h-(--content-height) w-full'>
-              <SideNavBar />
+              { displaySidebar && <SideNavBar /> }
               <div className='m-10 w-full h-auto'>
                 <Outlet />
               </div>
