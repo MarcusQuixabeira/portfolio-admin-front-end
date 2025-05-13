@@ -6,7 +6,7 @@
 :root {
   --top-bar-height: 54px;
   --footer-height: 54px;
-  --sidebar-width: 320px;
+  --sidebar-width: 250px;
   --content-height: calc(100vh - 108px);
 }
 
