@@ -12,7 +12,7 @@ export default function HeaderEdit() {
   const { register, handleSubmit, formState: { errors } } = useForm(
     {
       values: {
-        name: header?.language_id,
+        name: header?.name,
         title: header?.title,
         image_url: header?.image_url,
         image_alt: header?.image_alt,
