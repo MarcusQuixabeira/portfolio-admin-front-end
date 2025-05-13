@@ -1,10 +1,11 @@
 import { NavLink } from "react-router"
+import './SideNavBar.css'
 
 function SideNavBar() {
   return (
     <>
       <aside className="h-full w-(--sidebar-width) bg-zinc-300">
-        <nav className="mt-10 h-full">
+        <nav className="pt-10 h-full">
           <ul className="flex flex-col h-full">
             <li className="flex">
               <NavLink
