@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
-import { Language } from "../../../types"
+import { Header } from "../../../types"
 import { toast } from "react-toastify"
 import Button from "../../base/Button"
 import ApiHandler from "../../../api"
 import Dialog from "../../base/Dialog"
 
-function LanguageView() {
-  const [language, setLanguage] = useState<Language>()
+export default function HeaderView() {
+  const [header, setHeader] = useState<Header>()
   const [showModal, setShowModal] = useState(false)
 
   let params = useParams()
 
   useEffect(() => {
-    ApiHandler.get(`/language/${params.language_id}`)
+    ApiHandler.get(`/header/${params.header_id}`)
       .then(async (response) => {
         if (response.ok) {
-          setLanguage(await response.json())
+          setHeader(await response.json())
         } else if (response.status === 401) {
           window.localStorage.removeItem("auth_token")
           toast.error('Unauthorized')
@@ -31,11 +31,11 @@ function LanguageView() {
   let navigate = useNavigate()
 
   function handleBackClick() {
-    navigate('/languages')
+    navigate('/headers')
   }
 
   function handleEditClick() {
-    navigate(`/language/${params.language_id}/edit`)
+    navigate(`/headers/${params.header_id}/edit`)
   }
 
   function handleDeleteClick() {
@@ -43,12 +43,12 @@ function LanguageView() {
   }
 
   function deleteIt() {
-    ApiHandler.delete(`/language/${ params.language_id }`)
+    ApiHandler.delete(`/header/${ params.language_id }`)
       .then((response) => {
         if (response.ok) {
           setShowModal(false)
-          navigate('/languages')
-          toast.success('Language deleted successfully.')
+          navigate('/headers')
+          toast.success('Header deleted successfully.')
         } else if (response.status === 401) {
           window.localStorage.removeItem("auth_token")
           toast.error('Unauthorized')
@@ -62,25 +62,36 @@ function LanguageView() {
   return (
     <>
       <div className="flex flex-col gap-10">
-        <div className="text-2xl text-zinc-800 font-bold">Viewing Language #{language?.id}</div>
+        <div className="text-2xl text-zinc-800 font-bold">Viewing Header #{header?.id}</div>
         <div className="bg-zinc-50 p-5 flex flex-col gap-5 justify-center">
           <div className="flex">
             <div className="flex gap-2 w-1/3">
-              <div className="font-bold">Id:</div><span>{language?.id}</span>
+              <div className="font-bold">Id:</div><span>{header?.id}</span>
             </div>
             <div className="flex gap-2 w-1/3">
-              <div className="font-bold">Name:</div><span>{language?.name}</span>
+              <div className="font-bold">Name:</div><span>{header?.name}</span>
             </div>
             <div className="flex gap-2 w-1/3">
-              <div className="font-bold">Description:</div><span>{language?.description}</span>
+              <div className="font-bold">Title:</div><span>{header?.title}</span>
             </div>
           </div>
           <div className="flex">
             <div className="flex gap-2 w-1/3">
-              <div className="font-bold">Created at:</div><span>{language?.created_at}</span>
+              <div className="font-bold">Image URL:</div><span>{header?.image_url}</span>
             </div>
             <div className="flex gap-2 w-1/3">
-              <div className="font-bold">Updated at:</div><span>{language?.updated_at || '-'}</span>
+              <div className="font-bold">Image Alt:</div><span>{header?.image_alt}</span>
+            </div>
+            <div className="flex gap-2 w-1/3">
+              <div className="font-bold">Language Id:</div><span>{header?.language_id}</span>
+            </div>
+          </div>
+          <div className="flex">
+            <div className="flex gap-2 w-1/3">
+              <div className="font-bold">Created at:</div><span>{header?.created_at || '-'}</span>
+            </div>
+            <div className="flex gap-2 w-1/3">
+              <div className="font-bold">Updated at:</div><span>{header?.updated_at || '-'}</span>
             </div>
           </div>
           <div className="h-1 border-t-1 border-zinc-300"></div>
@@ -93,7 +104,7 @@ function LanguageView() {
       </div>
       { showModal &&
         <Dialog
-          title={`Delete confirmation of the Language ${language?.name}`}
+          title={`Delete confirmation of the Header ${header?.name}`}
           text="Are you sure?"
           size="small"
           confirmCallback={ deleteIt }
@@ -103,5 +114,3 @@ function LanguageView() {
     </>
   )
 }
-
-export default LanguageView

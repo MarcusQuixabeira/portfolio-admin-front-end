@@ -38,15 +38,15 @@ function ActionsButtons({ dataURL, item, updateData }: ActionsButtonsProps) {
   return (
     <>
       <div className="flex gap-3">
-        <div onClick={handleViewToClick} className='flex flex-col items-center hover:cursor-pointer underline'>
+        <div onClick={handleViewToClick} className='flex flex-col items-center hover:cursor-pointer hover:text-amber-600 hover:underline'>
           <div><LuEye /></div>
           <div>View</div>
         </div>
-        <div onClick={handleEditToClick} className='flex flex-col items-center hover:cursor-pointer underline'>
+        <div onClick={handleEditToClick} className='flex flex-col items-center hover:cursor-pointer hover:text-blue-600 hover:underline'>
           <LuPencil />
           <div>Edit</div>
         </div>
-        <div onClick={handleDeleteToClick} className='flex flex-col items-center hover:cursor-pointer underline'>
+        <div onClick={handleDeleteToClick} className='flex flex-col items-center hover:cursor-pointer hover:text-rose-600 hover:underline'>
           <LuTrash />
           <div>Delete</div>
         </div>

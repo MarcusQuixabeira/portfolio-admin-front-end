@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { Header } from '../../../types'
+import { TableHeader } from '../../../types'
 import Button from '../../base/Button'
 import Table from '../../base/Table'
 import ApiHandler from '../../../api'
+import { toast } from 'react-toastify'
 
-function LanguagesView() {
-  const [languages, setLanguages] = useState([])
+export default function HeaderList() {
+  const [headers, setHeaders] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const headers: Header[] = [
+  const tableHeaders: TableHeader[] = [
+    { text: 'Title', value: 'title' },
     { text: 'Name', value: 'name' },
-    { text: 'Description', value: 'description' },
+    { text: 'Image URL', value: 'image_url' },
+    { text: 'Language Id', value: 'language_id' },
   ]
 
   useEffect(() => { fetchData() }, [])
@@ -19,11 +22,11 @@ function LanguagesView() {
   let navigate = useNavigate()
 
   function handleClickHome() {
-    navigate('/')
+    navigate('/dashboard')
   }
 
   function handleClickAdd() {
-    navigate('/languages/new')
+    navigate('/headers/new')
   }
 
   function updateData() {
@@ -32,12 +35,18 @@ function LanguagesView() {
 
   function fetchData() {
     setLoading(true)
-    ApiHandler.get('/languages')
+    ApiHandler.get('/headers')
       .then(async (response) => {
-        setLanguages(await response.json())
+        if (response.ok) {
+          setHeaders(await response.json())
+        } else if (response.status === 401) {
+          window.localStorage.removeItem("auth_token")
+          toast.error('Unauthorized')
+          navigate('/')
+        }
       })
       .catch((error) => {
-        console.log(error)
+        toast.error(`An unexpected error ocurred: ${error.message}`)
       }).finally(() => {
         setLoading(false)
       })
@@ -46,24 +55,22 @@ function LanguagesView() {
   return (
     <>
       <div className="flex flex-col gap-10">
-        <div className="text-2xl text-zinc-800 font-bold">Languages Listing</div>
+        <div className="text-2xl text-zinc-800 font-bold">Headers Listing</div>
         <div className="bg-zinc-50 p-5 flex flex-col justify-center">
           <Table
-            dataURL='languages'
-            headers={ headers }
-            items={ languages }
+            dataURL='headers'
+            headers={ tableHeaders }
+            items={ headers }
             loading={ loading }
             actions
             updateData={ updateData }
           />
           <div className='flex w-full gap-4 justify-end mt-15'>
             <Button text='Back' type='secondary' onClick={handleClickHome}/>
-            <Button text='Add Language' type='primary' onClick={handleClickAdd}/>
+            <Button text='Add Headers' type='primary' onClick={handleClickAdd}/>
           </div>
         </div>
       </div>
     </>
   )
 }
-
-export default LanguagesView

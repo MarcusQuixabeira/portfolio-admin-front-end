@@ -1,10 +1,10 @@
-import { Header } from "../../types"
+import { TableHeader } from "../../types"
 import ActionsButtons from "./ActionsButtons"
 import ProgressBar from "./ProgressBar"
 
 interface TableProps {
-  headers: Header[]
-  items: any[]
+  headers: TableHeader[]
+  items: any[] | null
   loading: boolean
   dataURL: string
   actions?: boolean
@@ -28,7 +28,7 @@ function Table({headers, items, loading, dataURL, actions, noDataText, updateDat
             </tr>
           </thead>
           <tbody>
-            {items.map((item, outerIndex) => (
+            {items?.map((item, outerIndex) => (
               <tr key={ outerIndex } className='border-b-1 border-zinc-200'>
                 {headers.map((header, innerIndex) => (
                   <td key={ innerIndex } className='p-3'>{ item[header.value] }</td>
@@ -46,7 +46,7 @@ function Table({headers, items, loading, dataURL, actions, noDataText, updateDat
             ))}
           </tbody>
         </table>
-        { (!items || items.length === 0) && <div className="h-3 p-4 w-full text-center">{ noDataText ? noDataText : 'No available data.'}</div> }
+        { (items?.length === 0) && <div className="h-3 p-4 w-full text-center">{ noDataText ? noDataText : 'No available data.'}</div> }
         { loading && <ProgressBar /> }
       </div>
     </>

@@ -4,7 +4,7 @@ type ButtonType = 'primary' | 'secondary' | 'danger' | 'disabled'
 type ButtonSizeType = 'regular' | 'large' | 'small' | 'fluid'
 
 enum ButtonTypeEnum {
-  'primary' = 'bg-zinc-800 text-zinc-100 hover:bg-zinc-700 hover:border-green-400 hover:cursor-pointer active:scale-95',
+  'primary' = 'bg-zinc-800 text-zinc-100 hover:bg-zinc-700 hover:border-zinc-400 hover:cursor-pointer active:scale-95',
   'secondary' = 'bg-zinc-500 text-zinc-100 hover:bg-zinc-400 hover:border-zinc-200 hover:cursor-pointer active:scale-95',
   'danger' = 'bg-rose-800 text-zinc-100 hover:bg-rose-700 hover:border-rose-400 hover:cursor-pointer active:scale-95',
   'disabled' = 'bg-zinc-300 text-white'
