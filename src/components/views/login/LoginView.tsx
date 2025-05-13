@@ -71,7 +71,6 @@ export default function LoginView() {
                     className={getInputClass(errors, "password")}
                     {...register("password", { required: true })}
                   />
-                  <input type='text' className='autofill:bg-transparent' />
                   {errors?.password && <div className="text-rose-800 text-sm">Password is required</div>}
                 </div>
               </div>
