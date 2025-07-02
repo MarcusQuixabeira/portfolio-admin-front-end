@@ -16,7 +16,7 @@ function Table({headers, items, loading, dataURL, actions, noDataText, updateDat
   return (
     <>
       <div className="flex flex-col w-full">
-        <table className="w-full">
+        <table className="table-none md:table-fixed w-full">
           <thead className='border-b-1 border-zinc-200'>
             <tr>
               {headers.map((header, index) => (

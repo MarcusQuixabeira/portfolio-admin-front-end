@@ -42,7 +42,7 @@ export default function LoginView() {
   }
   return (
     <>
-      <div className="w-[400px] min-h-[400px] outline-1 outline-zinc-400">
+      <div className="outline-1 md:w-[400px] outline-zinc-400">
         <div className="flex flex-col p-6 items-center">
           <div className="font-bold text-2xl">
             Portfolio Admin

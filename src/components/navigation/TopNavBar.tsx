@@ -32,21 +32,21 @@ function TopNavbar({ toogleSidebar }: TopNavbarProps) {
             <li className='w-auto text-white flex justify-center items-center hover:bg-zinc-700 cursor-pointer'>
               <ToogleButton className="p-5" activeIcon={ LuMenu } innactiveIcon={ LuX } toogleCallback={ toogleSidebar }/>
             </li>
-            <NavLink to='/dashboard' className='flex justify-center items-center w-auto px-5 text-white hover:bg-zinc-700'>
+            <NavLink to='/dashboard' className='hidden md:flex md:justify-center md:items-center px-5 text-white hover:bg-zinc-700'>
               <li>
                 Home
               </li>
             </NavLink>
           </div>
           <div className='flex'>
-            <NavLink to="/dashboard" className='w-auto px-5 text-2xl text-white font-black flex justify-center items-center'>
+            <NavLink to="/dashboard" className='w-auto px-5 text-sm text-center md:text-2x1 text-white font-black flex justify-center items-center'>
               <li>
                 Porfolio Admin
               </li>
             </NavLink>
           </div>
           <div className='flex justify-end w-90'>
-            <li className='w-auto px-5 text-white flex justify-center items-center'>
+            <li className='hidden sm:flex w-auto px-5 text-white justify-center items-center'>
               { user?.username }
             </li>
             { user &&
