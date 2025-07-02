@@ -67,7 +67,7 @@ export default function LoginView() {
                 <div className="flex flex-col gap-2">
                   <label className="justify-start font-bold" htmlFor="password">Password*:</label>
                   <input
-                    type="text"
+                    type="password"
                     className={getInputClass(errors, "password")}
                     {...register("password", { required: true })}
                   />
