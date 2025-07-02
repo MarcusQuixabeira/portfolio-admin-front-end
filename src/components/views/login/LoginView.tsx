@@ -3,9 +3,11 @@ import { FieldErrors, useForm } from 'react-hook-form'
 import ApiHandler from '../../../api';
 import Button from '../../base/Button';
 import { useNavigate } from 'react-router';
+import { useState } from 'react';
 
 export default function LoginView() {
   const { register, handleSubmit, formState: { errors } } = useForm()
+  const [loading, setLoading] = useState(false)
 
   let navigate = useNavigate()
 
@@ -14,6 +16,7 @@ export default function LoginView() {
   }
 
   function onSubmit(data: any) {
+    setLoading(true)
     const formData = new FormData();
     formData.append('username', data.username);
     formData.append('password', data.password);
@@ -31,7 +34,7 @@ export default function LoginView() {
         }
       }).catch((error) => {
         toast.error(`An unexpected error happened: ${error.message}`)
-      })
+      }).finally(() => setLoading(false))
   }
 
   function getInputClass(errors: FieldErrors, inputName: string) {
@@ -78,7 +81,7 @@ export default function LoginView() {
           </form>
         </div>
         <div className='flex w-full my-10 justify-center'>
-          <Button text='Login' type='secondary' onClick={handleLoginClick} />
+          <Button text='Login' type='secondary' loading={loading} onClick={handleLoginClick} />
         </div>
       </div>
     </>

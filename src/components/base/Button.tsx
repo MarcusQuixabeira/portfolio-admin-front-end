@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react"
+import { LuLoader } from "react-icons/lu"
 
 type ButtonType = 'primary' | 'secondary' | 'danger' | 'disabled'
 type ButtonSizeType = 'regular' | 'large' | 'small' | 'fluid'
@@ -26,7 +27,7 @@ interface ButtonProps {
   onClick: MouseEventHandler
 }
 
-function Button({ text, type, size, disabled, onClick }: ButtonProps) {
+function Button({ text, type, size, disabled, loading, onClick }: ButtonProps) {
 
   function getButtonType(): ButtonType {
     return disabled ? 'disabled' : type || 'primary'
@@ -45,7 +46,10 @@ function Button({ text, type, size, disabled, onClick }: ButtonProps) {
             border-transparent
           `
         }>
-          { text }
+          <div className="flex gap-2 justify-center items-center">
+            { loading && <LuLoader className="animate-[spin_2s_linear_infinite]"/> }
+            { text }
+          </div>
       </button>
     </>
   )

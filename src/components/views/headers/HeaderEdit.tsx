@@ -5,10 +5,13 @@ import { Header, Language } from "../../../types"
 import ApiHandler from "../../../api"
 import Button from "../../base/Button"
 import { toast } from "react-toastify"
+import { LuLoader } from "react-icons/lu"
 
 export default function HeaderEdit() {
   const [header, setHeader] = useState<Header>()
   const [languages, setLanguages] = useState<Language[]>([])
+  const [loading, setLoading] = useState(false)
+  const [saving, setSaving] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm(
     {
       values: {
@@ -24,6 +27,7 @@ export default function HeaderEdit() {
   let navigate = useNavigate()
 
   useEffect(() => {
+    setLoading(true)
     ApiHandler.get(`/header/${params.header_id}`)
       .then(async (response) => {
         if (response.ok) {
@@ -36,7 +40,7 @@ export default function HeaderEdit() {
       })
       .catch((error) => {
         toast.error(`An unexpected error ocurred: ${error.message}`)
-      })
+      }).finally(() => setLoading(false))
   }, [])
 
   useEffect(() => {
@@ -64,6 +68,7 @@ export default function HeaderEdit() {
   }
 
   function onSubmit(data: any) {
+    setSaving(true)
     ApiHandler.patch(data, `/header/${header?.id}`)
       .then(async (response) => {
         if (response.ok) {
@@ -77,6 +82,9 @@ export default function HeaderEdit() {
       })
       .catch((error) => {
         toast.error(`An unexpected error ocurred: ${error.message}`)
+      })
+      .finally(() => {
+        setSaving(false)
       })
   }
 
@@ -92,6 +100,12 @@ export default function HeaderEdit() {
       <div className="flex flex-col gap-10">
         <div className="text-2xl text-zinc-800 font-bold">Editing Header #{header?.id}</div>
         <div className="bg-zinc-50 p-5 flex flex-col gap-5 justify-center">
+        { loading ?
+            <div className="flex flex-col gap-3 w-full items-center justify-center">
+              <LuLoader className="animate-[spin_2s_linear_infinite]" size={50} />
+              <span>Loading...</span>
+            </div>
+            :
           <form action={onSubmit} className="p-5">
             <div className="flex flex-col gap-5">
               <div className="flex gap-10">
@@ -162,10 +176,11 @@ export default function HeaderEdit() {
               </div>
             </div>
           </form>
+        }
           <div className="h-1 border-t-1 border-zinc-300"></div>
           <div className='flex w-full gap-4 justify-end'>
             <Button text='Cancel' type='secondary' onClick={handleCancelClick} />
-            <Button text='Edit Language' type='primary' onClick={handleSaveClick} />
+            <Button text='Edit Language' loading={ saving } type='primary' onClick={handleSaveClick} />
           </div>
         </div>
       </div>
