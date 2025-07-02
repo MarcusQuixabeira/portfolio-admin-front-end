@@ -1,11 +1,22 @@
 import { NavLink } from "react-router"
+import { UserContext } from "../../contexts/UserContext"
+import { useContext } from "react"
+
 import './SideNavBar.css'
 
 function SideNavBar() {
+  const user = useContext(UserContext)
   return (
     <>
-      <aside className="h-full w-(--sidebar-width) bg-zinc-300">
+      <aside className="absolute w-full h-(--content-height) sm:relative sm:w-(--sidebar-width) bg-zinc-300">
         <nav className="pt-10 h-full">
+          <div className="sm:hidden">
+            <div className="flex flex-col gap-1 p-3">
+              <div>Logged in as:</div>
+              <div className="font-bold">{user?.username}</div>
+            </div>
+            <div className="border-t border-zinc-400"></div>
+          </div>
           <ul className="flex flex-col h-full">
             <li className="flex">
               <NavLink

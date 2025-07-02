@@ -63,7 +63,7 @@ export default function LanguageList() {
             actions
             updateData={ updateData }
           />
-          <div className='flex w-full gap-4 justify-end mt-15'>
+          <div className='flex flex-col sm:flex-row sm:justify-end w-full gap-4 items-center mt-15'>
             <Button text='Back' type='secondary' onClick={handleClickHome}/>
             <Button text='Add Language' type='primary' onClick={handleClickAdd}/>
           </div>
