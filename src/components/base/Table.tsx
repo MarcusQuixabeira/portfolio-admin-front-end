@@ -31,7 +31,7 @@ function Table({headers, items, loading, dataURL, actions, noDataText, updateDat
             {items?.map((item, outerIndex) => (
               <tr key={ outerIndex } className='border-b-1 border-zinc-200'>
                 {headers.map((header, innerIndex) => (
-                  <td key={ innerIndex } className='p-3'>{ item[header.value] }</td>
+                  <td key={ innerIndex } className='p-3 truncate'>{ item[header.value] }</td>
                 ))}
                 { actions &&
                   <td className="p-3 flex justify-end">

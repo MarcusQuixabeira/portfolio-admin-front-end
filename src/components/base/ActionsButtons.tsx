@@ -24,7 +24,7 @@ function ActionsButtons({ dataURL, item, updateData }: ActionsButtonsProps) {
   }
 
   function deleteIt() {
-    ApiHandler.delete(`/language/${ item.id }`)
+    ApiHandler.delete(`/${dataURL}/${ item.id }`)
       .then(() => {
         setShowModal(false)
         updateData()

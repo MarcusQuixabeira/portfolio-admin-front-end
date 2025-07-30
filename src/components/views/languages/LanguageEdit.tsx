@@ -24,7 +24,7 @@ export default function LanguageEdit() {
 
   useEffect(() => {
     setLoading(true)
-    ApiHandler.get(`/language/${params.language_id}`)
+    ApiHandler.get(`/languages/${params.language_id}`)
       .then(async (response) => {
         if (response.ok) {
           setLanguage(await response.json())
@@ -49,7 +49,7 @@ export default function LanguageEdit() {
 
   function onSubmit(data: any) {
     setSaving(true)
-    ApiHandler.patch(data, `/language/${ language?.id }`)
+    ApiHandler.patch(data, `/languages/${ language?.id }`)
       .then(async (response) => {
         if (response.ok) {
           toast.success('Language updated successfully.')

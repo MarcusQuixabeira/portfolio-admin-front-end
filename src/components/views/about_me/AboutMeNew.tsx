@@ -30,7 +30,7 @@ export default function LanguageNew() {
   }, [])
 
   function handleCancelClick() {
-    navigate('/headers')
+    navigate('/about-mes')
   }
 
   function handleSaveClick() {
@@ -39,11 +39,11 @@ export default function LanguageNew() {
 
   function onSubmit(data: any) {
     setLoading(true)
-    ApiHandler.post(data, '/headers')
+    ApiHandler.post(data, '/about-mes')
       .then(async (response) => {
         if (response.ok) {
-          toast.success('Header created successfully.')
-          navigate('/headers')
+          toast.success('About me created successfully.')
+          navigate('/about-mes')
         } else if (response.status === 401) {
           window.localStorage.removeItem("auth_token")
           toast.error('Unauthorized')
@@ -73,20 +73,8 @@ export default function LanguageNew() {
           <form action={onSubmit} className="p-5">
             <div className="flex flex-col gap-5">
               <div className="flex gap-10">
-                {/* BEGIN of Input Name */}
-                <div className="flex flex-col gap-2 w-1/3">
-                  <label className="justify-start font-bold" htmlFor="name">Name*:</label>
-                  <input
-                    type="text"
-                    className={getInputClass("name")}
-                    {...register("name", { required: true })}
-                  />
-                  {errors?.name && <div className="text-rose-800 text-sm">Name is required</div>}
-                </div>
-                {/* END of Input Name */}
-
                 {/* BEGIN of Input Title*/}
-                <div className="flex flex-col gap-2 w-1/3">
+                <div className="flex flex-col gap-2 w-1/2">
                   <label className="justify-start font-bold" htmlFor="title">Title*:</label>
                   <input
                     type="text"
@@ -98,7 +86,7 @@ export default function LanguageNew() {
                 {/* END of Input Title */}
 
                 {/* BEGIN of Input Language*/}
-                <div className="flex flex-col gap-2 w-1/3">
+                <div className="flex flex-col gap-2 w-1/2">
                   <label className="justify-start font-bold" htmlFor="language_id">Language*:</label>
                   <select
                     className={getInputClass("language_id")}
@@ -113,30 +101,31 @@ export default function LanguageNew() {
                 </div>
                 {/* END of Input Language */}
               </div>
-              <div className="flex gap-10">
-                {/* BEGIN of Input Image URL*/}
-                <div className="flex flex-col gap-2 w-1/2">
-                  <label className="justify-start font-bold" htmlFor="image_url">Image URL*:</label>
-                  <input
-                    type="text"
-                    className={getInputClass("image_url")}
-                    {...register("image_url", { required: true })}
+              <div className="flex gap-10 w-full">
+                {/* BEGIN of Input Text */}
+                <div className="flex flex-col gap-2 w-full">
+                  <label className="justify-start font-bold" htmlFor="name">Text*:</label>
+                  <textarea
+                    rows={7}
+                    className={getInputClass("text")}
+                    {...register("text", { required: true })}
                   />
-                  {errors?.image_url && <div className="text-rose-800 text-sm">Image URL is required</div>}
+                  {errors?.text && <div className="text-rose-800 text-sm">Text is required</div>}
                 </div>
-                {/* END of Input Image URL */}
-
-                {/* BEGIN of Image Alt */}
-                <div className="flex flex-col gap-2 w-1/2">
-                  <label className="justify-start font-bold" htmlFor="image_alt">Image Alt*:</label>
-                  <input
-                    type="text"
-                    className={getInputClass("image_alt")}
-                    {...register("image_alt", { required: true })}
+                {/* END of Input Text */}
+              </div>
+              <div className="flex gap-10 w-full">
+                {/* BEGIN of Input Complementary text */}
+                <div className="flex flex-col gap-2 w-full">
+                  <label className="justify-start font-bold" htmlFor="name">Complementary Text*:</label>
+                  <textarea
+                    rows={7}
+                    className={getInputClass("text2")}
+                    {...register("text2", { required: true })}
                   />
-                  {errors?.image_alt && <div className="text-rose-800 text-sm">Image Alt is required</div>}
+                  {errors?.text2 && <div className="text-rose-800 text-sm">Text is required</div>}
                 </div>
-                {/* END of Input Image Alt */}
+                {/* END of Input Complementary text */}
               </div>
             </div>
           </form>
