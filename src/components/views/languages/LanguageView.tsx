@@ -17,7 +17,7 @@ function LanguageView() {
 
   useEffect(() => {
     setLoading(true)
-    ApiHandler.get(`/language/${params.language_id}`)
+    ApiHandler.get(`/languages/${params.language_id}`)
       .then(async (response) => {
         if (response.ok) {
           setLanguage(await response.json())
@@ -48,7 +48,7 @@ function LanguageView() {
 
   function deleteIt() {
     setDeleting(true)
-    ApiHandler.delete(`/language/${ params.language_id }`)
+    ApiHandler.delete(`/languages/${ params.language_id }`)
       .then((response) => {
         if (response.ok) {
           setShowModal(false)

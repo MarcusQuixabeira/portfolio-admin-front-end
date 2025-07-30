@@ -38,6 +38,16 @@ function SideNavBar() {
                 Headers
               </NavLink>
             </li>
+            <li className="flex">
+              <NavLink
+                to="/about-mes"
+                className={({ isActive }) =>
+                  isActive ? "p-4 w-full bg-zinc-500 text-white border-l-4 cursor-pointer border-green-400" : "p-4 w-full hover:bg-zinc-500 hover:text-white hover:border-l-4 hover:cursor-pointer border-zinc-400"
+                }
+              >
+                About Me
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </aside>

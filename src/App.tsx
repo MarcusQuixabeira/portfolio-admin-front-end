@@ -13,6 +13,10 @@ import HeaderList from './components/views/headers/HeaderList.tsx';
 import HeaderNew from './components/views/headers/HeaderNew.tsx';
 import HeaderView from './components/views/headers/HeaderView.tsx';
 import HeaderEdit from './components/views/headers/HeaderEdit.tsx';
+import AboutMeList from './components/views/about_me/AboutMeList.tsx';
+import AboutMeNew from './components/views/about_me/AboutMeNew.tsx';
+import AboutMeView from './components/views/about_me/AboutMeView.tsx';
+import AboutMeEdit from './components/views/about_me/AboutMeEdit.tsx';
 import './App.css'
 
 
@@ -33,6 +37,10 @@ function App() {
           <Route path='/headers/new' element={<ProtectedRoute><HeaderNew /></ProtectedRoute>} />
           <Route path='/headers/:header_id/view' element={<ProtectedRoute><HeaderView /></ProtectedRoute>} />
           <Route path='/headers/:header_id/edit' element={<ProtectedRoute><HeaderEdit /></ProtectedRoute>} />
+          <Route path='/about-mes' element={<ProtectedRoute><AboutMeList /></ProtectedRoute>} />
+          <Route path='/about-mes/new' element={<ProtectedRoute><AboutMeNew /></ProtectedRoute>} />
+          <Route path='/about-mes/:about_me_id/view' element={<ProtectedRoute><AboutMeView /></ProtectedRoute>} />
+          <Route path='/about-mes/:about_me_id/edit' element={<ProtectedRoute><AboutMeEdit /></ProtectedRoute>} />
         </Route>
       </Routes>
       <ToastContainer

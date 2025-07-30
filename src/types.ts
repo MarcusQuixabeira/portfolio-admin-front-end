@@ -17,6 +17,16 @@ export interface Header {
   language_id: string
 }
 
+export interface AboutMe {
+  id: string
+  title: string
+  text: string
+  text2: string
+  created_at: string
+  updated_at: string
+  language_id: string
+}
+
 export interface TableHeader {
   text: string
   value: string

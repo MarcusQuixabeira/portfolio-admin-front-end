@@ -21,7 +21,7 @@ function LanguageNew() {
 
   function onSubmit(data: any) {
     setLoading(true)
-    ApiHandler.post(data, '/language')
+    ApiHandler.post(data, '/languages')
       .then(async (response) => {
         if (response.ok) {
           toast.success('Language created successfully.')
